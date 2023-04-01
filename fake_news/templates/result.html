@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>News App</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <style>
+          body {
+              background-color: #F0F0F2;
+              color: #252B3B;
+              font-family: Arial, sans-serif;
+          }
+          h1 {
+              color: #11145A;
+          }
+          p strong {
+              color: #8198AF;
+          }
+          .prediction {
+              color: #FF7F5D;
+              font-size: 1.2rem;
+              font-weight: bold;
+          }
+          input[type="radio"] {
+              margin-right: 5px;
+          }
+          label {
+              margin-right: 15px;
+          }
+          #feedback-form {
+              margin-top: 20px;
+              margin-bottom: 20px;
+          }
+          .btn-primary {
+              background-color: #11145A;
+              border-color: #11145A;
+          }
+          .btn-primary:hover {
+              background-color: #252B3B;
+              border-color: #252B3B;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <h1 class="my-4">News Analysis Result:</h1>
+          <p><strong>News Text:</strong> {{ news_text }}</p>
+          <!-- <p><strong>Word Cloud:</strong></p> -->
+          <!-- <img src="{{ plot_url }}"><br> -->
+          <br>
+          <p class="prediction"><strong>Prediction:</strong> {{ prediction }}</p>
+          <!-- <p class="prediction"><strong>Accuracy Score:</strong> {{ acc_score }}</p>
+          <form id="feedback-form" action="{% url 'home' %}" method="post">
+              {% csrf_token %}
+              <p>Was the prediction correct?</p>
+              <!-- <div class="form-group">
+                  <label>
+                      <input type="radio" name="feedback" value="yes">Yes
+                  </label>
+                  <label>
+                      <input type="radio" name="feedback" value="no">No
+                  </label>
+              </div> 
+              <button type="submit" class="btn btn-primary">Submit Feedback</button>
+          </form> -->
+      </div>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper-base.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

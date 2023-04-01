@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>News App</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .form-group {
+                transition: all 0.3s ease;
+                background-color: #f7f7f1;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .form-group:focus-within {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+
+            .form-control {
+                background-color: #e4dcc1;
+                border-color: #e5c51d;
+                color: #241625;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+            }
+
+            .form-control:focus {
+                border-color: #939191;
+                box-shadow: none;
+            }
+
+            .btn-primary {
+                background-color: #e5c51d;
+                border-color: #e5c51d;
+                transition: all 0.3s ease;
+            }
+
+            .btn-primary:hover {
+                background-color: #241625;
+                border-color: #241625;
+            }
+
+            h1 {
+                font-size: 36px;
+                color: #241625;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+
+            body {
+                background-color: #c2af96;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Enter News Text:</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" name="news_text" rows="10" placeholder="Enter news text here"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper-base.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
