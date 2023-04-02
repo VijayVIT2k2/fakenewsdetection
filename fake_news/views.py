@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from fake_news.models import News
+from django.shortcuts import render, redirect
 from fake_news.news_det import FakeNewsDetector
+from django.contrib.auth import authenticate as auth_user
 
 def home(request):
     if request.method == 'POST':
@@ -21,3 +21,14 @@ def home(request):
         }
         return render(request, 'result.html', context)
     return render(request, 'home.html')
+
+def login(request):
+    return render(request, 'login.html')
+    
+def authenticate(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    user = auth_user(request, username = username, password = password)
+    if user is not None:
+        return render(request, 'add_news.html')
+    return redirect('login.html')

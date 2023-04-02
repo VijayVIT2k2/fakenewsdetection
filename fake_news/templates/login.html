@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Form</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body {
+                background-color: #c2af96;
+            }
+
+            .form-container {
+                background-color: #f7f7f1;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                padding: 20px;
+                transition: all 0.3s ease;
+                margin: auto;
+                margin-top: 50px;
+                max-width: 400px;
+            }
+
+            .form-container:focus-within {
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            }
+
+            h1 {
+                font-size: 36px;
+                color: #241625;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+
+            input[type="text"],
+            input[type="password"] {
+                background-color: #e4dcc1;
+                border-color: #e5c51d;
+                color: #241625;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+                padding: 10px;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+
+            input[type="text"]:focus,
+            input[type="password"]:focus {
+                border-color: #939191;
+                box-shadow: none;
+            }
+
+            input[type="submit"] {
+                background-color: #e5c51d;
+                border-color: #e5c51d;
+                color: #241625;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 10px;
+                transition: all 0.3s ease;
+                padding: 10px;
+                width: 100%;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #241625;
+                border-color: #241625;
+                color: #e5c51d;
+            }
+            label {
+                font-weight: bold;
+                color: #241625;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <h1>Login</h1>
+            <form method="POST" action="pass_check">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Enter your username">
+                <input type="password" name="password" placeholder="Enter your password">
+                <input type="submit" value="Login">
+            </form>
+            <form method = "POST">
+                {% csrf_token %}
+                <label for = "reg">New User:</label>
+                <input id = "reg" type="submit" value="Register">
+            </form>
+        </div>
+    </body>
+</html>
