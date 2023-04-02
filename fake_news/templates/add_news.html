@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Yes or No?</title>
+</head>
+<body>
+	<form>
+        {% csrf_token %}
+		<label for="input">Enter your text:</label>
+		<input type="text" id="input" name="input"><br><br>
+		<label for="yes">Yes</label>
+		<input type="radio" id="yes" name="option" value="yes">
+		<label for="no">No</label>
+		<input type="radio" id="no" name="option" value="no"><br><br>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
