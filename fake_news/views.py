@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate as auth_user, login as log
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 from fake_news.news_det import FakeNewsDetector
-from django.contrib.auth import authenticate as auth_user
 
 def home(request):
     if request.method == 'POST':
@@ -26,9 +28,29 @@ def login(request):
     return render(request, 'login.html')
     
 def authenticate(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    user = auth_user(request, username = username, password = password)
-    if user is not None:
-        return render(request, 'add_news.html')
-    return redirect('login.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth_user(request, username=username, password=password)
+        if user is not None:
+            return render(request, 'add_news.html')
+        else:
+            error_message = "Invalid username or password. Please try again."
+            messages.error(request, error_message)
+            return redirect('login')
+    else:
+        return redirect('login')
+    
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = auth_user(request, username=username, password=password)
+            log(request, user)
+            return redirect('add_news')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
