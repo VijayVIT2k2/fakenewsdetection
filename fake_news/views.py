@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate as auth_user, login as log
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 from fake_news.news_det import FakeNewsDetector
 
 def home(request):
@@ -26,14 +28,25 @@ def home(request):
 
 def login(request):
     return render(request, 'login.html')
+
+def user_home(request):
+    return render(request, 'user_home.html')
     
 def authenticate(request):
+    print(request.POST.get('username'))
+    print(request.POST.get('password'))
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = auth_user(request, username=username, password=password)
+        print(request.POST.get('username'))
+        print(request.POST.get('password'))
         if user is not None:
-            return render(request, 'add_news.html')
+            user_obj = User.objects.get(username = username)
+            print(user_obj.username)
+            print(user_obj.get_username)
+            log(request, user)
+            return render(request, 'user_home.html')
         else:
             error_message = "Invalid username or password. Please try again."
             messages.error(request, error_message)
@@ -43,14 +56,28 @@ def authenticate(request):
     
 def register(request):
     if request.method == 'POST':
+        print("POST Method")
         form = UserCreationForm(request.POST)
+        username = request.POST.get('username')
+        password = request.POST.get('password1')
+        print(username)
+        print(password)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
+            print('Form is valid')
+            
+            username = request.POST.get('username')
+            password = request.POST.get('password1')
+            create_user = User.objects.create_user(username=username, password=password)
+            create_user.save()
+            print(username)
             user = auth_user(request, username=username, password=password)
             log(request, user)
-            return redirect('add_news')
+            user = User.objects.get(username=username)
+            print(user.username)
+            return render(request,"user_home.html")
+        else:
+            print(form.errors)
     else:
+        
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})

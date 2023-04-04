@@ -64,32 +64,32 @@
 </head>
 <body>
     <h1>User Registration</h1>
-    <!-- <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form> -->
     <div class="container">
-        <form method="POST">
+        <form method="POST" action="{% url 'reg'%}">
           {% csrf_token %}
           <div class="form-group">
             {{ form.username.label_tag }}
             {{ form.username }}
           </div>
-          <!-- <div class="form-group">
-            {{ form.email.label_tag }}
-            {{ form.email }}
-          </div> -->
           <div class="form-group">
             {{ form.password1.label_tag }}
             {{ form.password1 }}
           </div>
-          <!-- <div class="form-group">
+		  <div class="form-group">
             {{ form.password2.label_tag }}
             {{ form.password2 }}
-          </div> -->
+          </div>
           <button type="submit" class="btn btn-primary">Register</button>
         </form>
+		{% if form.errors %}
+			<ul>
+			{% for field_errors in form.errors.values %}
+				{% for error in field_errors %}
+					<li>{{ error }}</li>
+				{% endfor %}
+			{% endfor %}
+			</ul>
+    	{% endif %}
       </div>
 </body>
 </html>
