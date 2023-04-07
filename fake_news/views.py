@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate as auth_user, login as log
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+import threading
 
 from fake_news.news_det import FakeNewsDetector
 
@@ -77,7 +78,16 @@ def register(request):
             return render(request,"user_home.html")
         else:
             print(form.errors)
-    else:
-        
+    else:        
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+
+def add_news(request):
+    return render(request,'add_news.html')
+
+def pro_news(request):
+
+    return render(request, 'added.html')
+
+def news_process():
+    print("Hi")
