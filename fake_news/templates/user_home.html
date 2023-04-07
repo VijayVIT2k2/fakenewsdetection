@@ -4,16 +4,28 @@
     <title>User Home</title>
 </head>
 <body>
-    {% if user.is_authenticated %}
-    <h1>Welcome, {{ user.username }}!</h1>
-    <p>Choose a page to visit:</p>
-    <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'login' %}">Logout</a></li>
-    </ul>
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <h1>Welcome, admin!</h1>
+        <p>Choose a page to visit:</p>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'admin:index' %}">Admin Dashboard</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    {% else %}
+        <h1>Welcome, {{ user.username }}!</h1>
+        <p>Choose a page to visit:</p>
+        <ul>
+            <li><a href="{% url 'add_news' %}">Add News Content</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+    {% endif %}
 {% else %}
     <p>You need to log in to access this page.</p>
 {% endif %}
+
 
 </body>
 </html>
