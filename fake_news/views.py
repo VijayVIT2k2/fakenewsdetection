@@ -118,15 +118,23 @@ def news_process(context):
             'text':text,
             'class':out_class
         }
-
         write_to_csv(data)
 
 def write_to_csv(data):
-    filename = "datasets/new_data.csv"
+    dir_path = "datasets"
+    filename = os.path.join(dir_path, "new_data.csv")
     file_exists = os.path.isfile(filename)
     with open(filename, mode='a', newline='') as csvfile:
         fieldnames = ['text', 'class']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if not file_exists:
             writer.writeheader()  # write header only if file did not exist already
-        writer.writerow(data)  # write the data row
+        writer.writerow(data) # write the data row
+
+def check_news(request):
+    file_path = os.path.join(os.path.dirname(__file__), 'datasets', 'new_data.csv')
+    with open(file_path, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        csv_data = [row for row in reader]
+        context = {'data':csv_data}
+    return render(request, 'admin_check_news.html', context)

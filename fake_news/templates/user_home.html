@@ -6,13 +6,15 @@
 <body>
 {% if user.is_authenticated %}
     {% if user.is_superuser %}
-        <h1>Welcome, admin!</h1>
-        <p>Choose a page to visit:</p>
+        <h1>Welcome, admin!{{ user.username }}</h1>
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'admin:index' %}">Admin Dashboard</a></li>
-            <li><a href="{% url 'login' %}">Logout</a></li>
+            <li>
+                <a href = "{% url 'check_news' %}">
+                    Verify Added News
+                </a>
+            </li>
         </ul>
+        
     {% else %}
         <h1>Welcome, {{ user.username }}!</h1>
         <p>Choose a page to visit:</p>
