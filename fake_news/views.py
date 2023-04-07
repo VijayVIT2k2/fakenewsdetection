@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 import threading
+import csv
+import os
 
 from fake_news.news_det import FakeNewsDetector
 
@@ -65,7 +67,6 @@ def register(request):
         print(password)
         if form.is_valid():
             print('Form is valid')
-            
             username = request.POST.get('username')
             password = request.POST.get('password1')
             create_user = User.objects.create_user(username=username, password=password)
@@ -86,8 +87,46 @@ def add_news(request):
     return render(request,'add_news.html')
 
 def pro_news(request):
-
+    text = request.POST.get('input')
+    out = request.POST.get('option')
+    context = {
+        'text':text,
+        'out':out
+    }
+    t = threading.Thread(target=news_process, args=[context])
+    t.start()
     return render(request, 'added.html')
 
-def news_process():
-    print("Hi")
+def news_process(context):
+    text = context['text']
+    out = context['out']
+    if out == 'yes':
+        out = True
+    elif out == 'no':
+        out = False
+    det = FakeNewsDetector()
+    pred = det.predict(text)
+    if out==pred['label']:
+        pass
+    elif out!=pred['label']:
+        out_class = None
+        if out == True:
+            out_class = 1
+        elif out == False:
+            out_class = 0
+        data = {
+            'text':text,
+            'class':out_class
+        }
+
+        write_to_csv(data)
+
+def write_to_csv(data):
+    filename = "datasets/new_data.csv"
+    file_exists = os.path.isfile(filename)
+    with open(filename, mode='a', newline='') as csvfile:
+        fieldnames = ['text', 'class']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        if not file_exists:
+            writer.writeheader()  # write header only if file did not exist already
+        writer.writerow(data)  # write the data row
