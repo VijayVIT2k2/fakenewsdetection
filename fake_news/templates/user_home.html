@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>User Home</title>
+    {% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
 </head>
 <body>
 {% if user.is_authenticated %}
