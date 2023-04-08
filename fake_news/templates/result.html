@@ -5,55 +5,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-      <style>
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 30px 0;
-}
-
-h1 {
-  font-size: 36px;
-  font-weight: bold;
-  color: #0F0F12;
-}
-
-p {
-  font-size: 18px;
-  line-height: 1.5;
-  color: #252525;
-}
-
-.prediction {
-  font-weight: bold;
-  color: #D95C59;
-}
-
-.btn {
-  background-color: #F39F7E;
-  border-color: #F39F7E;
-  color: #FFFFFF;
-}
-
-.btn:hover {
-  background-color: #D95C59;
-  border-color: #D95C59;
-  color: #FFFFFF;
-}
-
-.btn-secondary {
-  background-color: #B6CDBF;
-  border-color: #B6CDBF;
-  color: #FFFFFF;
-}
-
-.btn-secondary:hover {
-  background-color: #719D99;
-  border-color: #719D99;
-  color: #FFFFFF;
-}
-
-      </style>
+      {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
   </head>
   <body>
       <div class="container">

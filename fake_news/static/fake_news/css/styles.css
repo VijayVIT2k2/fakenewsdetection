@@ -1,0 +1,202 @@
+/* Define the font family and background color for the body element */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F1B98C;
+  }
+  
+  /* Style the container element */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FEF2E8;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style the form container element */
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FDDED6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style the heading element */
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #D95C59;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the form element */
+  form {
+    margin-bottom: 20px;
+  }
+  
+  /* Style the input elements */
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    border: 2px solid #B6CDBF;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    color: #252525;
+    background-color: #D1DED3;
+    margin-bottom: 20px;
+  }
+  
+  /* Style the submit button */
+  input[type="submit"] {
+    background-color: #F39F7E;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #D95C59;
+  }
+  
+  /* Style the register button */
+  label[for="reg"],
+  input#reg {
+    background-color: #719D99;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    text-align: center;
+  }
+  
+  label[for="reg"]:hover,
+  input#reg:hover {
+    background-color: #45767C;
+  }
+  
+  /* Style the messages element */
+  .messages {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .messages li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+  }
+  
+  .messages li.error {
+    background-color: #D95C59;
+  }
+  
+  .messages li.success {
+    background-color: #55BD94;
+  }
+
+  h1 {
+    color: #252525;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #252525;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    color: #252525;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #9CBFAC;
+    font-size: 16px;
+    color: #252525;
+  }
+  
+  input[type="submit"] {
+    padding: 10px;
+    background-color: #F1B98C;
+    color: #252525;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #F39F7E;
+  }
+  
+  ul {
+    margin-bottom: 20px;
+    color: #D95C59;
+    font-size: 16px;
+  }
+  
+  li {
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+    }
+    
+    .my-4 {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+    }
+    
+    .prediction {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #D95C59;
+    margin-top: 1rem;
+    }
+    
+    strong {
+    font-weight: bold;
+    color: #45767C;
+    }
+  

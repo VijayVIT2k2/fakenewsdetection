@@ -3,6 +3,7 @@ import os
 import re
 import string
 import threading
+from datetime import date
 
 import joblib
 import pandas as pd
@@ -135,9 +136,9 @@ def news_process(context):
 
 def write_to_csv(data):
     dir_path = "datasets"
-    filename = os.path.join(dir_path, "new_data.csv")
-    file_exists = os.path.isfile(filename)
-    with open(filename, mode='a', newline='') as csvfile:
+    file_path = os.path.join(os.path.dirname(__file__), dir_path, 'new_data.csv')
+    file_exists = os.path.isfile(file_path)
+    with open(file_path, mode='a', newline='', encoding='latin1') as csvfile:
         fieldnames = ['text', 'class']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if not file_exists:
@@ -145,17 +146,6 @@ def write_to_csv(data):
         writer.writerow(data)
 
 def check_news(request):
-    # file_path = os.path.join(os.path.dirname(__file__), 'datasets', 'new_data.csv')
-    # print(file_path)
-    # with open(file_path, newline='') as csvfile:
-    #     # fields = ['text','class']
-    #     reader = csv.DictReader(csvfile)
-
-    #     csv_data = [row for row in reader]
-    #     print(csv_data)
-    #     context = {'csv_data':csv_data}
-
-    #     print(context)
     return render(request, 'admin_check_news.html')
 
 def download_csv(request):
@@ -225,13 +215,22 @@ def update_thread(request):
     Flag = save_models(vectorization,LR,DT,RF)
     if Flag:
         message = "Models updated successfully"
+        file_path_new = os.path.join(os.path.dirname(__file__), 'datasets', 'new_data.csv')
+        with open(file_path_new, 'r') as source_file:
+            reader = csv.reader(source_file)
+            data = [row for row in reader]
+        os.remove(file_path_new)
+        today = date.today().strftime('%Y-%m-%d')
+        for row in data:
+            row.append(today)
+        file_path_all = os.path.join(os.path.dirname(__file__), 'datasets', 'all_mod.csv')
+        with open(file_path_all, 'a', newline='') as dest_file:
+            writer = csv.writer(dest_file)
+            writer.writerows(data)
     else: 
         message = "Failed to update models"
     context = {"message": message}
     return render(request, "admin_check_news.html", context)
-
-    
-
 
 def preprocess(df):
     df['text'] = df['text'].astype(str)

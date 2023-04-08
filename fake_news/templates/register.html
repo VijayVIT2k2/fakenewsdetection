@@ -3,64 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <style>
-		.form-group {
-		    transition: all 0.3s ease;
-		    background-color: #f7f7f1;
-		    border-radius: 10px;
-		    padding: 20px;
-		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-		}
-
-		.form-group:focus-within {
-		    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-		}
-
-		.form-control {
-		    background-color: #e4dcc1;
-		    border-color: #e5c51d;
-		    color: #241625;
-		    font-size: 16px;
-		    font-weight: bold;
-		    border-radius: 10px;
-		    transition: all 0.3s ease;
-		    height: 40px;
-		}
-
-		.form-control:focus {
-		    border-color: #939191;
-		    box-shadow: none;
-		}
-
-		.btn-primary {
-		    background-color: #e5c51d;
-		    border-color: #e5c51d;
-		    transition: all 0.3s ease;
-		    border-radius: 10px;
-		    padding: 10px 20px;
-		    font-size: 16px;
-		    font-weight: bold;
-		    color: #241625;
-		    margin-top: 20px;
-		}
-
-		.btn-primary:hover {
-		    background-color: #241625;
-		    border-color: #241625;
-		    color: #fff;
-		}
-
-		h1 {
-		    font-size: 36px;
-		    color: #241625;
-		    text-align: center;
-		    margin-bottom: 50px;
-		}
-
-		body {
-		    background-color: #c2af96;
-		}
-	</style>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
 </head>
 <body>
     <h1>User Registration</h1>

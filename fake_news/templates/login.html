@@ -3,88 +3,12 @@
     <head>
         <title>Login Form</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <style>
-            /* Form container */
-.form-container {
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 50px;
-  border: 2px solid #252525;
-  background-color: #F1B98C;
-  color: #252525;
-}
-
-/* Form input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 2px solid #252525;
-  border-radius: 4px;
-}
-
-/* Form submit button */
-input[type=submit] {
-  background-color: #252525;
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-input[type=submit]:hover {
-  background-color: #F1B98C;
-  color: #252525;
-  border: 2px solid #252525;
-}
-
-/* Register button */
-#reg {
-  background-color: #F39F7E;
-  color: #252525;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
-}
-
-#reg:hover {
-  background-color: #252525;
-  color: #F1B98C;
-  border: 2px solid #252525;
-}
-
-/* Messages */
-.messages {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.messages li {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.messages li.error {
-  color: #D95C59;
-  background-color: #F0A7A5;
-}
-
-.messages li.success {
-  color: #45767C;
-  background-color: #D1DED3;
-}
-
-        </style>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
     </head>
-    <body>
+    
+</html>
+<body>
         <div class="form-container">
             {% if messages %}
             <ul class="messages">
@@ -108,4 +32,3 @@ input[type=submit]:hover {
             </form>
         </div>
     </body>
-</html>
