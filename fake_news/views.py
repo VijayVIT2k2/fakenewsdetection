@@ -1,13 +1,26 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate as auth_user, login as log
-from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-import threading
 import csv
 import os
+import re
+import string
+import threading
+
+import joblib
+import pandas as pd
+from django.contrib import messages
+from django.contrib.auth import authenticate as auth_user
+from django.contrib.auth import login as log
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
 
 from fake_news.news_det import FakeNewsDetector
+
 
 def home(request):
     if request.method == 'POST':
@@ -132,9 +145,120 @@ def write_to_csv(data):
         writer.writerow(data)
 
 def check_news(request):
+    # file_path = os.path.join(os.path.dirname(__file__), 'datasets', 'new_data.csv')
+    # print(file_path)
+    # with open(file_path, newline='') as csvfile:
+    #     # fields = ['text','class']
+    #     reader = csv.DictReader(csvfile)
+
+    #     csv_data = [row for row in reader]
+    #     print(csv_data)
+    #     context = {'csv_data':csv_data}
+
+    #     print(context)
+    return render(request, 'admin_check_news.html')
+
+def download_csv(request):
     file_path = os.path.join(os.path.dirname(__file__), 'datasets', 'new_data.csv')
     with open(file_path, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         csv_data = [row for row in reader]
-        context = {'data':csv_data}
-    return render(request, 'admin_check_news.html', context)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="new_data.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['text', 'class'])
+    for row in csv_data:
+        writer.writerow([row['text'], row['class']])
+    return response
+
+def upload_csv(request):
+    context = {}
+    if request.method == 'POST' and request.FILES.get('file'):
+        file = request.FILES['file']
+        file_name = os.path.join(os.path.dirname(__file__), 'datasets', 'new_data.csv')
+        os.remove(file_name)
+        with open(file_name, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+        message =  'File uploaded successfully.'
+        context = {"message":message}
+    return render(request, "admin_check_news.html", context)
+
+def update(request):
+    thread = threading.Thread(target=update_thread, args =(request,) )
+    thread.start()
+    message = "Wait till models are updates"
+    context = {"message":message}
+    return render(request, "admin_check_news.html", context)
+
+
+def update_thread(request):
+    data_true = pd.read_csv('fake_news\\datasets\\True.csv', encoding='latin1')
+    data_fake = pd.read_csv('fake_news\\datasets\\Fake.csv', encoding='latin1')
+    data_fake["class"] = 0
+    data_true["class"] = 1
+    data = pd.concat([data_fake, data_true], axis=0)
+    data = data.drop(['title', 'subject', 'date'], axis=1)
+    data = data.sample(frac=1)
+    data.reset_index(inplace=True)
+    data.drop(['index'], axis=1, inplace=True)
+    data_new = pd.read_csv('fake_news\\datasets\\new_data.csv', encoding='latin1')
+    data = pd.concat([data, data_new], axis=0)
+    data = preprocess(data)
+    x = data['text']
+    y = data['class']
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)
+    print("Data Split")
+    vectorization = TfidfVectorizer()
+    xv_train = vectorization.fit_transform(x_train)
+    # xv_test = vectorization.transform(x_test)
+    print("Vectorize")
+    LR = LogisticRegression()
+    LR.fit(xv_train, y_train)
+    print("Logistic")
+    DT = DecisionTreeClassifier()
+    DT.fit(xv_train, y_train)
+    print("DecisionTree")
+    RF = RandomForestClassifier()
+    RF.fit(xv_train, y_train)
+    print("RandomForest")
+    Flag = save_models(vectorization,LR,DT,RF)
+    if Flag:
+        message = "Models updated successfully"
+    else: 
+        message = "Failed to update models"
+    context = {"message": message}
+    return render(request, "admin_check_news.html", context)
+
+    
+
+
+def preprocess(df):
+    df['text'] = df['text'].astype(str)
+    df['text'] = df['text'].apply(wordopt)
+    return df
+
+def wordopt(text):
+        text = text.lower()
+        text = re.sub('\[.*?\]', '', text)
+        text = re.sub("\\W", " ", text)
+        text = re.sub('http?://\S+|www\.\S+', '', text)
+        text = re.sub('<.*?>+', '', text)
+        text = re.sub('[%s]' % re.escape(string.punctuation), '', text)
+        text = re.sub('\n', '', text)
+        text = re.sub('\w*\d\w*', '', text)
+        text = re.sub('\s+', ' ', text)
+        return text
+def save_models(vectorization,LR,DT,RF):
+    model_dir = "fake_news\pred_models"
+    for filename in os.listdir(model_dir):
+        if filename.endswith('.pkl'):
+            os.remove(os.path.join(model_dir, filename))
+    try:
+        joblib.dump(LR, f"{model_dir}/logistic_regression.pkl")
+        joblib.dump(DT, f"{model_dir}/decision_tree.pkl")
+        joblib.dump(RF, f"{model_dir}/random_forest.pkl")
+        joblib.dump(vectorization, f"{model_dir}/vectorizer.pkl")
+        return True
+    except:
+        return False

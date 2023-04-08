@@ -3,55 +3,68 @@
     <head>
         <title>News App</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
+
         <style>
-            .form-group {
-                transition: all 0.3s ease;
-                background-color: #f7f7f1;
-                border-radius: 10px;
-                padding: 20px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            }
+body {
+  background-color: #028174;
+}
 
-            .form-group:focus-within {
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            }
+h1 {
+  color: #454362;
+  font-size: 2rem;
+}
 
-            .form-control {
-                background-color: #e4dcc1;
-                border-color: #e5c51d;
-                color: #241625;
-                font-size: 16px;
-                font-weight: bold;
-                border-radius: 10px;
-                transition: all 0.3s ease;
-            }
+label {
+  color: #29445D;
+  font-size: 1.2rem;
+}
 
-            .form-control:focus {
-                border-color: #939191;
-                box-shadow: none;
-            }
+textarea.form-control {
+  border-color: #9CBFAC;
+  color: #719D99;
+  font-size: 1.2rem;
+}
 
-            .btn-primary {
-                background-color: #e5c51d;
-                border-color: #e5c51d;
-                transition: all 0.3s ease;
-            }
+.btn-primary {
+  background-color: #5B79C8;
+  border-color: #5B79C8;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+}
 
-            .btn-primary:hover {
-                background-color: #241625;
-                border-color: #241625;
-            }
+.btn-secondary {
+  background-color: #FEC74E;
+  border-color: #FEC74E;
+  color: #1D2038;
+  font-size: 1.2rem;
+}
 
-            h1 {
-                font-size: 36px;
-                color: #241625;
-                text-align: center;
-                margin-bottom: 50px;
-            }
+.btn-primary:hover {
+  background-color: #45767C;
+  border-color: #45767C;
+}
 
-            body {
-                background-color: #c2af96;
-            }
+.btn-secondary:hover {
+  background-color: #FF6738;
+  border-color: #FF6738;
+}
+
+.form-group textarea.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(156, 191, 172, 0.25);
+}
+
+.btn-primary:focus,
+.btn-secondary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(156, 191, 172, 0.25);
+}
+
+.btn-block {
+  border-radius: 0;
+}
+
+
         </style>
     </head>
     <body>

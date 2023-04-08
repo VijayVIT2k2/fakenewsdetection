@@ -4,74 +4,84 @@
         <title>Login Form</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
-            body {
-                background-color: #c2af96;
-            }
+            /* Form container */
+.form-container {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 50px;
+  border: 2px solid #252525;
+  background-color: #F1B98C;
+  color: #252525;
+}
 
-            .form-container {
-                background-color: #f7f7f1;
-                border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                padding: 20px;
-                transition: all 0.3s ease;
-                margin: auto;
-                margin-top: 50px;
-                max-width: 400px;
-            }
+/* Form input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid #252525;
+  border-radius: 4px;
+}
 
-            .form-container:focus-within {
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            }
+/* Form submit button */
+input[type=submit] {
+  background-color: #252525;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
 
-            h1 {
-                font-size: 36px;
-                color: #241625;
-                text-align: center;
-                margin-bottom: 50px;
-            }
+input[type=submit]:hover {
+  background-color: #F1B98C;
+  color: #252525;
+  border: 2px solid #252525;
+}
 
-            input[type="text"],
-            input[type="password"] {
-                background-color: #e4dcc1;
-                border-color: #e5c51d;
-                color: #241625;
-                font-size: 16px;
-                font-weight: bold;
-                border-radius: 10px;
-                transition: all 0.3s ease;
-                padding: 10px;
-                margin-bottom: 20px;
-                width: 100%;
-            }
+/* Register button */
+#reg {
+  background-color: #F39F7E;
+  color: #252525;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
 
-            input[type="text"]:focus,
-            input[type="password"]:focus {
-                border-color: #939191;
-                box-shadow: none;
-            }
+#reg:hover {
+  background-color: #252525;
+  color: #F1B98C;
+  border: 2px solid #252525;
+}
 
-            input[type="submit"] {
-                background-color: #e5c51d;
-                border-color: #e5c51d;
-                color: #241625;
-                font-size: 16px;
-                font-weight: bold;
-                border-radius: 10px;
-                transition: all 0.3s ease;
-                padding: 10px;
-                width: 100%;
-            }
+/* Messages */
+.messages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-            input[type="submit"]:hover {
-                background-color: #241625;
-                border-color: #241625;
-                color: #e5c51d;
-            }
-            label {
-                font-weight: bold;
-                color: #241625;
-                font-size: 16px;
-            }
+.messages li {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.messages li.error {
+  color: #D95C59;
+  background-color: #F0A7A5;
+}
+
+.messages li.success {
+  color: #45767C;
+  background-color: #D1DED3;
+}
+
         </style>
     </head>
     <body>

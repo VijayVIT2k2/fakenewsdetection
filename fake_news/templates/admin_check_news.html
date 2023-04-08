@@ -5,31 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+		function submitBtn() {
+			document.getElementById("upload").style.display = "block";
+            document.getElementById("update").style.display = "block";
+		}
+	</script>
 </head>
 <body>
-    {% if user.is_authenticated and user.is_superuser %}
+{% if user.is_authenticated and user.is_superuser %}
     <h1>Welcome, admin! {{ user.username }}</h1>
-    {% if csv_data %}
-        {% with current_index=forloop.counter0 %}
-            <div class="csv-row">
-                <p><strong>Text:</strong> {{ csv_data[current_index].text }}</p>
-                <p><strong>Class:</strong> {{ csv_data[current_index].class }}</p>
-                <form method="post" action="{% url 'delete_csv_row' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="row_index" value="{{ current_index }}">
-                    <input type="submit" value="Delete">
-                </form>
-            </div>
-            {% if current_index > 0 %}
-                <a href="{% url 'view_csv_data' %}?index={{ current_index-1 }}">Previous</a>
-            {% endif %}
-            {% if current_index < csv_data|length-1 %}
-                <a href="{% url 'view_csv_data' %}?index={{ current_index+1 }}">Next</a>
-            {% endif %}
-        {% endwith %}
-    {% else %}
-        <p>No data available.</p>
+    {% if message %}
+      <p>{{ message }}</p>
     {% endif %}
+    <form method="post" action="{% url 'download' %}">
+        {% csrf_token %}
+        <input type="submit" name="download" value="Download CSV" onclick = "submitBtn">
+    </form>
+    <form method="post" action="{% url 'upload' %}" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <input type="file" name="csv_file" accept=".csv">
+        <input type="submit" name="upload" style="display: nono;" value="Upload CSV">
+    </form>
+    <form action="{% url 'update' %}">
+        {% csrf_token %}
+        <input type = "submit" name = "update" style="display: nono;" value="Update the models">
+    </form>
 {% endif %}
 
 </body>

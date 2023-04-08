@@ -9,5 +9,8 @@ urlpatterns = [
     path('user_home',views.user_home,name='user_home'),
     path('add_news', views.add_news, name = 'add_news'),
     path('pro_news', views.pro_news, name = 'pro_news'),
-    path('check_news', views.check_news, name = "check_news")
+    path('check_news', views.check_news, name = "check_news"),
+    path('download_csv/', views.download_csv, name='download'),
+    path('upload', views.upload_csv,name='upload'),
+    path('update_models',views.update, name="update")
 ]
