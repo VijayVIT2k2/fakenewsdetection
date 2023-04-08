@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #F1B98C;
-  }
+}
   
   /* Style the container element */
   .container {
@@ -199,4 +199,9 @@ body {
     font-weight: bold;
     color: #45767C;
     }
-  
+    .btn-primary{
+      color: #F39F7E;
+      background-color: #F95C59;
+      border-color: #F39F7E;
+      border-radius: 25px;
+    }

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	  {% load static %}
 	  <link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
   </head>
@@ -25,15 +26,6 @@
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
       </form>
-		  {% if form.errors %}
-        <ul>
-        {% for field_errors in form.errors.values %}
-          {% for error in field_errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        {% endfor %}
-        </ul>
-    	{% endif %}
     </div>
   </body>
 </html>
