@@ -128,8 +128,8 @@ def write_to_csv(data):
         fieldnames = ['text', 'class']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         if not file_exists:
-            writer.writeheader()  # write header only if file did not exist already
-        writer.writerow(data) # write the data row
+            writer.writeheader()
+        writer.writerow(data)
 
 def check_news(request):
     file_path = os.path.join(os.path.dirname(__file__), 'datasets', 'new_data.csv')
