@@ -193,12 +193,14 @@ def update_thread(request):
     data.reset_index(inplace=True)
     data.drop(['index'], axis=1, inplace=True)
     data_new = pd.read_csv('fake_news\\datasets\\new_data.csv', encoding='latin1')
-    data = pd.concat([data, data_new], axis=0)
+    # data = pd.concat([data, data_new], axis=0)
     data = preprocess(data)
     x = data['text']
     y = data['class']
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)
     print("Data Split")
+    x_train = pd.concat([x_train,data_new['text']], axis = 0)
+    y_train = pd.concat([y_train,data_new['class']], axis = 0)
     vectorization = TfidfVectorizer()
     xv_train = vectorization.fit_transform(x_train)
     # xv_test = vectorization.transform(x_test)
