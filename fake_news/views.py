@@ -193,7 +193,6 @@ def update_thread(request):
     data.reset_index(inplace=True)
     data.drop(['index'], axis=1, inplace=True)
     data_new = pd.read_csv('fake_news\\datasets\\new_data.csv', encoding='latin1')
-    # data = pd.concat([data, data_new], axis=0)
     data = preprocess(data)
     x = data['text']
     y = data['class']
