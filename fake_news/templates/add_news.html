@@ -7,7 +7,8 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
 	<style>
 		textarea {
-  margin: 30px 0px; /* Adds a margin of 10 pixels on the top and bottom of the textarea */
+  margin: 30px 30px;
+  border-radius: 10px;
 }
 
 .form-check {
@@ -20,16 +21,23 @@
 	</style>
 </head>
 <body>
-	<form method="post" action="pro_news" class="form-group form-check" >
+	<form method="post" action="pro_news" class="form-group" >
         {% csrf_token %}
 		<textarea class="form-control" name="input" placeholder="Enter your text:" required></textarea><br><br>
-		<label for="yes" class="form-check-label" style="display: inline-block; vertical-align: middle;">True</label>
-		<input type="radio" id="yes" name="option" value="yes" style="display: inline-block; vertical-align: middle;" required>
-		
-		<!-- <br> -->
-		<label for="no" class="form-check-label" style="display: inline; vertical-align: middle;">False</label>
-		<input type="radio" id="no" name="option" value="no" style="display: inline-block; vertical-align: middle;" required>
-		<!-- <br><br> -->
+		<div style="margin: 1% 8%; " >
+			<label for="yes" class="form-check-label" style="display: inline; text-align: center;">
+				True
+			</label>
+			<input type="radio" id="yes" name="option" value="yes" required>
+		</div>
+		<br>
+		<div style="margin: 1% 8%;">
+			<label for="no" class="form-check-label"  style="display: inline; text-align: center;">
+				False
+			</label>
+			<input type="radio" id="no" name="option" value="no" style = "display: inline;" required>
+		</div>
+		<br><br>
 		
 		<input type="submit" value="Submit" style="margin: 6%;">
 	</form>

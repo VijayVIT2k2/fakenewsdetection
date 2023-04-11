@@ -27,7 +27,7 @@ def home(request):
     if request.method == 'POST':
         news_text = request.POST.get('news_text')
         detector = FakeNewsDetector()
-        # plot_url = detector.plot_wordcloud()
+        
         prediction = detector.predict(news_text)
         if(prediction['label'] is True):
             pred_result = "The news content is REAL"
@@ -49,19 +49,12 @@ def login(request):
 def user_home(request):
     return render(request, 'user_home.html')
     
-def authenticate(request):
-    print(request.POST.get('username'))
-    print(request.POST.get('password'))
+def authenticate(request):    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = auth_user(request, username=username, password=password)
-        print(request.POST.get('username'))
-        print(request.POST.get('password'))
         if user is not None:
-            user_obj = User.objects.get(username = username)
-            print(user_obj.username)
-            print(user_obj.get_username)
             log(request, user)
             return render(request, 'user_home.html')
         else:
@@ -77,8 +70,6 @@ def register(request):
         form = UserCreationForm(request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password1')
-        print(username)
-        print(password)
         if form.is_valid():
             print('Form is valid')
             username = request.POST.get('username')
@@ -202,7 +193,6 @@ def update_thread(request):
     y_train = pd.concat([y_train,data_new['class']], axis = 0)
     vectorization = TfidfVectorizer()
     xv_train = vectorization.fit_transform(x_train)
-    # xv_test = vectorization.transform(x_test)
     print("Vectorize")
     LR = LogisticRegression()
     LR.fit(xv_train, y_train)

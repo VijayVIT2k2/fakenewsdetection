@@ -34,9 +34,7 @@ class FakeNewsDetector:
         x = self.data['text']
         y = self.data['class']
         self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(x, y, test_size=0.25)
-        # print("Hello")
         self.vectorization = joblib.load('fake_news/pred_models/vectorizer.pkl')
-        # self.xv_train = self.vectorization.fit_transform(self.x_train)
         self.LR = joblib.load('fake_news/pred_models/logistic_regression.pkl')
         self.DT = joblib.load('fake_news/pred_models/decision_tree.pkl')
         self.RF = joblib.load('fake_news/pred_models/random_forest.pkl')
@@ -72,10 +70,8 @@ class FakeNewsDetector:
             boolean_flag = True
         else:
             boolean_flag = False
-        # return boolean_flag
         return {
         'label': boolean_flag,
-        # 'label_name': label_name,
         'probabilities': probabilities,
         'accuracy_score': accuracy_score
         }

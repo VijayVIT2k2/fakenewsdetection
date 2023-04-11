@@ -19,6 +19,8 @@ body {
   }
   form {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
   }
   input[type="text"],
   input[type="password"] {
@@ -96,13 +98,6 @@ body {
     margin-bottom: 20px;
     text-align: center;
   }
-  
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
   .form-group {
     margin-bottom: 20px;
   }
