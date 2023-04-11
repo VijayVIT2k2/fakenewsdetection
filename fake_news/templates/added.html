@@ -2,14 +2,17 @@
 <html>
 <head>
 	<title>News Added Successfully</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'fake_news/css/styles.css' %}">
 </head>
 <body>
 	<h1>News Added Successfully!</h1>
-	<p>Your news has been added successfully.</p>
-	<a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'add_news' %}">Add News</a>
-    <a href="{% url 'user_home' %}">User Home</a>    
+	<p class="text-center">Your news has been added successfully.</p>
+	<div class = "d-flex justify-content-center">
+		<a href="{% url 'home' %}" class="btn btn-primary mr-2">Check News</a>
+    	<a href="{% url 'add_news' %} " class="btn btn-primary mx-2">Add News</a>
+    	<a href="{% url 'user_home' %}" class="btn btn-primary ml-2">Home</a>    
+	</div>
 </body>
 </html>

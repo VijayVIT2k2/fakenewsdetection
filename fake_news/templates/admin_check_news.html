@@ -9,6 +9,7 @@
 		function submitBtn() {
 			document.getElementById("upload").style.display = "block";
             document.getElementById("update").style.display = "block";
+            document.getElementById("csv_file").style.display = "block";
 		}
 	</script>
     {% load static %}
@@ -16,7 +17,7 @@
 </head>
 <body>
 {% if user.is_authenticated and user.is_superuser %}
-    <h1>Welcome, admin! {{ user.username }}</h1>
+    <h1>Welcome {{ user.username }}</h1>
     {% if message %}
       <p>{{ message }}</p>
     {% endif %}
@@ -26,12 +27,12 @@
     </form>
     <form method="post" action="{% url 'upload' %}" enctype="multipart/form-data" >
         {% csrf_token %}
-        <input type="file" name="csv_file" accept=".csv">
-        <input type="submit" name="upload" style="display: nono;" value="Upload CSV">
+        <input type="file" name="csv_file" accept=".csv" class="file-upload" required>
+        <input type="submit" name="upload"  value="Upload CSV">
     </form>
     <form action="{% url 'update' %}">
         {% csrf_token %}
-        <input type = "submit" name = "update" style="display: nono;" value="Update the models">
+        <input type = "submit" name = "update" value="Update the models">
     </form>
 {% endif %}
 

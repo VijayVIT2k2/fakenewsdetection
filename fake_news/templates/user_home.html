@@ -9,14 +9,12 @@
 <body>
 {% if user.is_authenticated %}
     {% if user.is_superuser %}
-        <h1>Welcome, admin!{{ user.username }}</h1>
-        <ul>
-            <li>
-                <a href = "{% url 'check_news' %}">
-                    Verify Added News
-                </a>
-            </li>
-        </ul>
+        <h1>Welcome {{ user.username }}</h1>
+        <div class = "d-flex justify-content-center">
+            <a href = "{% url 'check_news' %}" class="btn btn-primary mx-2">
+                Verify Added News
+            </a>
+        </div>
         
     {% else %}
         <h1 class="text-center">Welcome, {{ user.username }}!</h1>

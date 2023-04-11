@@ -239,6 +239,7 @@ def preprocess(df):
     return df
 
 def wordopt(text):
+        text = re.sub(r'^Reuters\s+', '', text)
         text = text.lower()
         text = re.sub('\[.*?\]', '', text)
         text = re.sub("\\W", " ", text)

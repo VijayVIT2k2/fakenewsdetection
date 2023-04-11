@@ -20,17 +20,18 @@
 	</style>
 </head>
 <body>
-	<form method="post" action="pro_news" class="form-group form-check">
+	<form method="post" action="pro_news" class="form-group form-check" >
         {% csrf_token %}
-		<textarea class="form-control" name="input" placeholder="Enter your text:"></textarea><br><br>
+		<textarea class="form-control" name="input" placeholder="Enter your text:" required></textarea><br><br>
+		<label for="yes" class="form-check-label" style="display: inline-block; vertical-align: middle;">True</label>
+		<input type="radio" id="yes" name="option" value="yes" style="display: inline-block; vertical-align: middle;" required>
 		
-		<input type="radio" id="yes" name="option" value="yes" class="form-check-input">
-		<label for="yes" class="form-check-label">True</label>
-		<br>
+		<!-- <br> -->
+		<label for="no" class="form-check-label" style="display: inline; vertical-align: middle;">False</label>
+		<input type="radio" id="no" name="option" value="no" style="display: inline-block; vertical-align: middle;" required>
+		<!-- <br><br> -->
 		
-		<input type="radio" id="no" name="option" value="no" class="form-check-input"><br><br>
-		<label for="no" class="form-check-label">False</label>
-		<input type="submit" value="Submit">
+		<input type="submit" value="Submit" style="margin: 6%;">
 	</form>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper-base.min.js"></script>
